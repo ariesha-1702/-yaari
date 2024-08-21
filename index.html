@@ -42,69 +42,69 @@
                     <div class="blog-masonry masonry-true">
                         <div class="gallery">
                             <script>
-                        const totalImages = 57;
-                        const galleryDiv = document.querySelector('.gallery');
+                                const totalImages = 57;
+                                const galleryDiv = document.querySelector('.gallery');
 
-                        // Function to load an image and return a promise
-                        function loadImage(src) {
-                            return new Promise((resolve, reject) => {
-                                const img = new Image();
-                                img.src = src;
-                                img.onload = () => resolve(img);
-                                img.onerror = () => reject(img);
-                            });
-                        }
+                                // Function to load an image and return a promise
+                                function loadImage(src) {
+                                    return new Promise((resolve, reject) => {
+                                        const img = new Image();
+                                        img.src = src;
+                                        img.onload = () => resolve(img);
+                                        img.onerror = () => reject(img);
+                                    });
+                                }
 
-                        // Loop through images and handle them sequentially
-                        async function loadImages() {
-                            for (let i = 1; i <= totalImages; i++) {
-                                try {
-                                    // Try loading the .jpeg image
-                                    const img = await loadImage(`images/${i}.jpeg`);
+                                // Loop through images and handle them sequentially
+                                async function loadImages() {
+                                    for (let i = 1; i <= totalImages; i++) {
+                                        try {
+                                            // Try loading the .jpeg image
+                                            const img = await loadImage(`images/${i}.jpeg`);
 
-                                    const postMasonryDiv = document.createElement('div');
-                                    postMasonryDiv.className = 'post-masonry col-md-4 col-sm-6';
-                                    postMasonryDiv.innerHTML = `
-                                        <div class="post-thumb">
-                                            <img src="images/${i}.jpeg" alt="">
-                                            <div class="post-hover text-center">
-                                                <div class="inside">
-                                                    <p></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                                    galleryDiv.appendChild(postMasonryDiv);
-
-                                } catch (error) {
-                                    // If .jpeg fails, try loading the .png image
-                                    try {
-                                        const imgPng = await loadImage(`images/${i}.png`);
-
-                                        const postMasonryDiv = document.createElement('div');
-                                        postMasonryDiv.className = 'post-masonry col-md-4 col-sm-6';
-                                        postMasonryDiv.innerHTML = `
-                                            <div class="post-thumb">
-                                                <img src="images/${i}.png" alt="">
-                                                <div class="post-hover text-center">
-                                                    <div class="inside">
-                                                        <p></p>
+                                            const postMasonryDiv = document.createElement('div');
+                                            postMasonryDiv.className = 'post-masonry col-md-4 col-sm-6';
+                                            postMasonryDiv.innerHTML = `
+                                                <div class="post-thumb">
+                                                    <img src="images/${i}.jpeg" alt="" loading="lazy">
+                                                    <div class="post-hover text-center">
+                                                        <div class="inside">
+                                                            <p></p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        `;
-                                        galleryDiv.appendChild(postMasonryDiv);
+                                            `;
+                                            galleryDiv.appendChild(postMasonryDiv);
 
-                                    } catch (error) {
-                                        console.log(`Image images/${i}.jpeg and images/${i}.png both failed to load.`);
+                                        } catch (error) {
+                                            // If .jpeg fails, try loading the .png image
+                                            try {
+                                                const imgPng = await loadImage(`images/${i}.png`);
+
+                                                const postMasonryDiv = document.createElement('div');
+                                                postMasonryDiv.className = 'post-masonry col-md-4 col-sm-6';
+                                                postMasonryDiv.innerHTML = `
+                                                    <div class="post-thumb">
+                                                        <img src="images/${i}.png" alt="" loading="lazy">
+                                                        <div class="post-hover text-center">
+                                                            <div class="inside">
+                                                                <p></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                `;
+                                                galleryDiv.appendChild(postMasonryDiv);
+
+                                            } catch (error) {
+                                                console.log(`Image images/${i}.jpeg and images/${i}.png both failed to load.`);
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
 
-                        // Start loading images
-                        loadImages();
-                    </script>
+                                // Start loading images
+                                loadImages();
+                            </script>
                         </div>
                     </div>
                 </div>
